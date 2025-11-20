@@ -10,7 +10,6 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
     from: deployer,
     log: true,
   });
-  console.log(`EncryptedFitnessTracker contract: `, deployedFitnessTracker.address);
 };
 export default func;
 func.id = "deploy_contracts"; // id required to prevent reexecution
