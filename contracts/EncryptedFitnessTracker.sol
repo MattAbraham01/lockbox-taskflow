@@ -95,5 +95,27 @@ contract EncryptedFitnessTracker {
         return _activityData[msg.sender][activityType];
     }
 
+    /// @notice Get all activity types that have been initialized for a user
+    /// @param user The address of the user
+    /// @return Array of activity types that have data
+    function getUserActivities(address user) external view returns (ActivityType[] memory) {
+        ActivityType[] memory activities = new ActivityType[](6);
+        uint256 count = 0;
+
+        for (uint256 i = 0; i < 6; i++) {
+            if (_activityInitialized[user][ActivityType(i)]) {
+                activities[count] = ActivityType(i);
+                count++;
+            }
+        }
+
+        // Resize array to actual count
+        ActivityType[] memory result = new ActivityType[](count);
+        for (uint256 i = 0; i < count; i++) {
+            result[i] = activities[i];
+        }
+
+        return result;
+    }
 }
 
