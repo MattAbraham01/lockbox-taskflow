@@ -117,5 +117,23 @@ contract EncryptedFitnessTracker {
 
         return result;
     }
+
+    /// @notice Get total activity data across all activity types for a user
+    /// @param user The address of the user
+    /// @return totalData Sum of all activity data across all initialized activities
+    /// @return activityCount Number of different activity types with data
+    function getTotalActivityData(address user) external view returns (uint32 totalData, uint256 activityCount) {
+        totalData = 0;
+        activityCount = 0;
+
+        for (uint256 i = 0; i < 6; i++) {
+            if (_activityInitialized[user][ActivityType(i)]) {
+                totalData += _activityData[user][ActivityType(i)];
+                activityCount++;
+            }
+        }
+
+        return (totalData, activityCount);
+    }
 }
 
