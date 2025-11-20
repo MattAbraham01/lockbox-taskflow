@@ -135,5 +135,39 @@ contract EncryptedFitnessTracker {
 
         return (totalData, activityCount);
     }
+
+    /// @notice Store multiple activity data entries in a single transaction
+    /// @param activityTypes Array of activity types to store
+    /// @param activityData Array of corresponding activity data values
+    /// @param inputProofs Array of input proofs (ignored in simplified version)
+    function batchStoreActivities(
+        ActivityType[] calldata activityTypes,
+        uint256[] calldata activityData,
+        bytes[] calldata inputProofs
+    ) external {
+        require(activityTypes.length == activityData.length, "Array length mismatch");
+        require(activityTypes.length == inputProofs.length, "Array length mismatch");
+        require(activityTypes.length > 0, "Cannot store empty batch");
+        require(activityTypes.length <= 10, "Batch size limited to 10 entries for gas efficiency");
+
+        for (uint256 i = 0; i < activityTypes.length; i++) {
+            uint32 data = uint32(activityData[i]);
+
+            // Store or update activity data
+            if (_activityInitialized[msg.sender][activityTypes[i]]) {
+                // Accumulate the activity data
+                _activityData[msg.sender][activityTypes[i]] += data;
+            } else {
+                _activityData[msg.sender][activityTypes[i]] = data;
+                _activityInitialized[msg.sender][activityTypes[i]] = true;
+            }
+
+            emit ActivityDataStored(msg.sender, activityTypes[i], block.timestamp);
+        }
+
+        // Update global tracking
+        _totalActivities[msg.sender] += uint32(activityTypes.length);
+        _lastUpdateTime[msg.sender] = block.timestamp;
+    }
 }
 
