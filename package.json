@@ -84,6 +84,7 @@
     "local-node": "hardhat node",
     "deploy-local": "hardhat deploy --network localhost",
     "deploy-sepolia": "hardhat deploy --network sepolia",
+    "deploy-mainnet": "hardhat deploy --network mainnet",
     "frontend-dev": "cd frontend && npm run dev",
     "build:vercel": "cd frontend && npm install && npm run genabi && npm run build:vercel"
   },
