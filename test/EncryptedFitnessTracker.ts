@@ -17,6 +17,20 @@ describe("EncryptedFitnessTracker", function () {
     await fitnessTracker.waitForDeployment();
   });
 
+  it("Should deploy successfully", async function () {
+    expect(await fitnessTracker.getAddress()).to.be.properAddress;
+  });
+
+  it("Should store activity data", async function () {
+    [deployer, user1] = await hre.ethers.getSigners();
+
+    const FitnessTrackerFactory = await hre.ethers.getContractFactory(
+      "EncryptedFitnessTracker"
+    );
+    fitnessTracker = await FitnessTrackerFactory.deploy();
+    await fitnessTracker.waitForDeployment();
+  });
+
 
   it("Should store activity data", async function () {
     const activityData = 30; // 30 minutes
