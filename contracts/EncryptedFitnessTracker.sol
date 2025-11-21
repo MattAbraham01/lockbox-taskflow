@@ -95,6 +95,33 @@ contract EncryptedFitnessTracker {
         return _activityData[msg.sender][activityType];
     }
 
+    /// @notice Get activity statistics for a user
+    /// @param user The address of the user
+    /// @return totalMinutes Total minutes across all activities
+    /// @return activityCount Number of different activities
+    /// @return averageMinutes Average minutes per activity
+    function getActivityStatistics(address user)
+        external
+        view
+        returns (uint32 totalMinutes, uint256 activityCount, uint32 averageMinutes)
+    {
+        uint32 total = 0;
+        uint256 count = 0;
+
+        for (uint256 i = 0; i < 6; i++) {
+            if (_activityInitialized[user][ActivityType(i)]) {
+                total += _activityData[user][ActivityType(i)];
+                count++;
+            }
+        }
+
+        if (count > 0) {
+            averageMinutes = total / uint32(count);
+        }
+
+        return (total, count, averageMinutes);
+    }
+
     /// @notice Get all activity types that have been initialized for a user
     /// @param user The address of the user
     /// @return Array of activity types that have data
