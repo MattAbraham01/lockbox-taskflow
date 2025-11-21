@@ -196,5 +196,25 @@ contract EncryptedFitnessTracker {
         _totalActivities[msg.sender] += uint32(activityTypes.length);
         _lastUpdateTime[msg.sender] = block.timestamp;
     }
+
+    /// @notice Validate activity data input
+    /// @param activityType The type of fitness activity
+    /// @param activityData The activity data to validate
+    /// @return isValid True if data is within acceptable ranges
+    function validateActivityData(ActivityType activityType, uint256 activityData)
+        external
+        pure
+        returns (bool isValid)
+    {
+        // Basic validation: activity data should be reasonable
+        // Maximum reasonable daily activity: 24 hours = 1440 minutes
+        if (activityData == 0 || activityData > 1440) {
+            return false;
+        }
+
+        // Activity-specific validation could be added here
+        // For now, we just check basic bounds
+        return true;
+    }
 }
 
