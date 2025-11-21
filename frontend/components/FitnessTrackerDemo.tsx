@@ -38,6 +38,7 @@ export const FitnessTrackerDemo = () => {
   const [selectedActivity, setSelectedActivity] = useState<ActivityType>(ActivityType.Running);
   const [activityInput, setActivityInput] = useState<string>("30");
   const [showDebugInfo, setShowDebugInfo] = useState<boolean>(false);
+  const [validationError, setValidationError] = useState<string | null>(null);
 
   const {
     instance: fhevmInstance,
