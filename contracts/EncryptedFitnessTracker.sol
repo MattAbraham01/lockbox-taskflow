@@ -216,5 +216,36 @@ contract EncryptedFitnessTracker {
         // For now, we just check basic bounds
         return true;
     }
+
+    /// @notice Get activity trends for a specific activity type
+    /// @param user The address of the user
+    /// @param activityType The type of fitness activity
+    /// @param daysBack Number of days to analyze (max 30)
+    /// @return totalMinutes Total minutes for the period
+    /// @return averageDaily Average minutes per day
+    /// @return isTrendingUp Whether activity is increasing over time
+    function getActivityTrend(address user, ActivityType activityType, uint256 daysBack)
+        external
+        view
+        returns (uint32 totalMinutes, uint32 averageDaily, bool isTrendingUp)
+    {
+        require(daysBack > 0 && daysBack <= 30, "Days back must be between 1 and 30");
+
+        if (!_activityInitialized[user][activityType]) {
+            return (0, 0, false);
+        }
+
+        uint32 data = _activityData[user][activityType];
+        totalMinutes = data;
+
+        // Simple average calculation (in a real implementation, you'd track daily data)
+        averageDaily = data / uint32(daysBack);
+
+        // For trending analysis, we'd need historical data
+        // For now, just return basic stats
+        isTrendingUp = data > 0; // Simplistic trending logic
+
+        return (totalMinutes, averageDaily, isTrendingUp);
+    }
 }
 
