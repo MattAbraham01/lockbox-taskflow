@@ -117,5 +117,36 @@ describe("EncryptedFitnessTracker", function () {
     expect(runningData).to.equal(30);
     expect(cyclingData).to.equal(45);
   });
+
+  it("Should provide activity statistics for comprehensive user analytics", async function () {
+    await fitnessTracker.storeActivityData(0, 30, "0x00"); // Running: 30
+    await fitnessTracker.storeActivityData(1, 45, "0x00"); // Cycling: 45
+    await fitnessTracker.storeActivityData(2, 20, "0x00"); // Swimming: 20
+
+    const [totalMinutes, activityCount, averageMinutes] = await fitnessTracker.getActivityStatistics(deployer.address);
+
+    expect(totalMinutes).to.equal(95); // 30 + 45 + 20
+    expect(activityCount).to.equal(3); // 3 different activities
+    expect(averageMinutes).to.equal(31); // 95 / 3 ≈ 31
+  });
+
+  it("Should validate activity data input ranges", async function () {
+    // Valid data should return true
+    expect(await fitnessTracker.validateActivityData(0, 60)).to.be.true; // 1 hour running
+
+    // Invalid data should return false
+    expect(await fitnessTracker.validateActivityData(0, 0)).to.be.false; // 0 minutes
+    expect(await fitnessTracker.validateActivityData(0, 2000)).to.be.false; // Too many minutes
+  });
+
+  it("Should provide activity trend analysis", async function () {
+    await fitnessTracker.storeActivityData(0, 90, "0x00"); // 90 minutes running
+
+    const [totalMinutes, averageDaily, isTrendingUp] = await fitnessTracker.getActivityTrend(deployer.address, 0, 7);
+
+    expect(totalMinutes).to.equal(90);
+    expect(averageDaily).to.equal(12); // 90 / 7 ≈ 12
+    expect(isTrendingUp).to.be.true;
+  });
 });
 
