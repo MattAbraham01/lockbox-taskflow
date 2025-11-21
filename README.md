@@ -2,6 +2,11 @@
 
 A privacy-preserving fitness activity tracking application built with FHEVM (Fully Homomorphic Encryption Virtual Machine) technology. Users can record their fitness activities (running, cycling, swimming, weightlifting, yoga, walking) in encrypted form, and view their activity data through secure decryption.
 
+## 🔗 Links
+
+- **📹 Demo Video**: [Watch on GitHub](https://github.com/MattAbraham01/lockbox-taskflow/blob/main/lock-box.mp4)
+- **🌐 Live Demo**: [View on Vercel](https://lock-box-two.vercel.app/)
+
 ## Features
 
 - **Privacy-Preserving**: Fitness activity data is encrypted using FHEVM, ensuring complete user privacy
