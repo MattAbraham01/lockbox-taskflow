@@ -5,7 +5,7 @@ A privacy-preserving fitness activity tracking application built with FHEVM (Ful
 ## 🔗 Links
 
 - **📹 Demo Video**: [Watch on GitHub](https://github.com/MattAbraham01/lockbox-taskflow/blob/main/lock-box.mp4)
-- **🌐 Live Demo**: [View on Vercel](https://lock-box-two.vercel.app/)
+- **🌐 Live Demo**: [View on Vercel](https://lock-box-rosy.vercel.app/)
 
 ## Features
 
