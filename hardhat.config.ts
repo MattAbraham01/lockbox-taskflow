@@ -66,7 +66,7 @@ const config: HardhatUserConfig = {
     },
     sepolia: {
       accounts: [
-        "0x" + "7bcbe27ab27a2abae41389d8e5c77874fec3cff61e19d0125c0e78ee3f8bbbcf"
+        "0xbc7ffd4305faac2efcc8d24dd12b5e0ee3a5896487a0f18bcd4442f109fe4184"
       ],
       chainId: 11155111,
       url: `https://sepolia.infura.io/v3/${INFURA_API_KEY}`,

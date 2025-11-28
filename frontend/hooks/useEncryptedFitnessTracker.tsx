@@ -146,13 +146,13 @@ export const useEncryptedFitnessTracker = (parameters: {
     [ActivityType.Walking]: undefined,
   });
 
-  const clearActivityDataRef = useRef<Record<ActivityType, ClearValueType>>({
-    [ActivityType.Running]: undefined as any,
-    [ActivityType.Cycling]: undefined as any,
-    [ActivityType.Swimming]: undefined as any,
-    [ActivityType.Weightlifting]: undefined as any,
-    [ActivityType.Yoga]: undefined as any,
-    [ActivityType.Walking]: undefined as any,
+  const clearActivityDataRef = useRef<Record<ActivityType, ClearValueType | undefined>>({
+    [ActivityType.Running]: undefined,
+    [ActivityType.Cycling]: undefined,
+    [ActivityType.Swimming]: undefined,
+    [ActivityType.Weightlifting]: undefined,
+    [ActivityType.Yoga]: undefined,
+    [ActivityType.Walking]: undefined,
   });
 
   const [isRefreshing, setIsRefreshing] = useState<boolean>(false);

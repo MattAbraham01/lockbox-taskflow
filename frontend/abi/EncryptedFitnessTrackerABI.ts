@@ -1,9 +1,10 @@
+
 /*
   This file is auto-generated.
   Command: 'npm run genabi'
 */
 export const EncryptedFitnessTrackerABI = {
-  abi: [
+  "abi": [
     {
       "anonymous": false,
       "inputs": [
