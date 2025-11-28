@@ -1,0 +1,14 @@
+node_modules
+artifacts
+cache
+coverage
+dist
+types
+fhevmTemp
+*.js
+!*.config.js
+!*.mjs
+!.eslintrc.js
+!.prettierrc.js
+!.solcover.js
+
